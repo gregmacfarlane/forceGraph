@@ -1,0 +1,49 @@
+---
+title: "Using a forceGraph"
+author: "Greg Macfarlane"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+## igraph
+The `igraph` package is popular for studying networks of various kinds in R. 
+The `igraph` library comes with its own plotting mechanism, but it is static and
+difficult to control.
+
+```{r igraphdemo}
+library(igraph)
+g <- graph.atlas(900)
+plot(g)
+```
+
+## networkD3
+Recently, the `networkD3` package has included a function to make pretty html
+plots of graph-style objects. Unfortunately, the `networkd3` library is somewhat
+picky in its formulation, so we have created a function that will plot the 
+graph automatically.
+
+```{r networkD3_demo}
+library(networkD3)
+data("MisLinks")
+data("MisNodes")
+forceNetwork(
+  Links = MisLinks, Nodes = MisNodes, 
+  Source = "source", Target = "target", Value = "value", 
+  NodeID = "name", Group = "group", opacity = 0.9
+)
+```
+
+## forceNetwork
+The `simpleNetwork` function is better than the default `plot.igraph`, but 
+is not flexible enough.
+
+```{r simpleNetwork}
+
+```
+
